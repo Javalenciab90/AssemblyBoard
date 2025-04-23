@@ -3,6 +3,9 @@ package com.javalenciab90.design_system.components.button
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import com.javalenciab90.design_system.components.preview.ColumnPresenter
 import com.javalenciab90.design_system.theme.AssemblyBoardAppTheme
 import com.javalenciab90.design_system.theme.Dimens
 
@@ -54,12 +58,21 @@ fun GenericButtonContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun GenericButtonContentPreview() {
     AssemblyBoardAppTheme {
-        GenericButtonContent(
-            label = "Some button"
-        )
+        ColumnPresenter {
+            GenericButtonContent(
+                label = "Some button",
+                leftIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Build,
+                        contentDescription = null
+                    )
+                },
+                centerContent = true
+            )
+        }
     }
 }

@@ -1,22 +1,28 @@
 package com.javalenciab90.design_system.components.textfield
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.javalenciab90.design_system.theme.errorLight
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
+import com.javalenciab90.design_system.components.text.Label
+import com.javalenciab90.design_system.theme.Dimens
 import com.javalenciab90.design_system.theme.outlineLight
-import com.javalenciab90.design_system.theme.outlineVariantLight
 
 @Composable
 fun GenericTextField(
     value: String,
     label: String,
     modifier: Modifier = Modifier,
+    shape: RoundedCornerShape = RoundedCornerShape(Dimens.All_4),
     onValueChange: (String) -> Unit = {},
     readOnly: Boolean = false,
     isError: Boolean = false,
@@ -35,18 +41,20 @@ fun GenericTextField(
         value = value,
         onValueChange = onValueChange,
         isError = isError,
+        shape = shape,
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedBorderColor = outlineVariantLight,
-            focusedBorderColor = outlineLight,
-            errorSupportingTextColor = errorLight,
-            errorBorderColor = errorLight
+            unfocusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
+            errorSupportingTextColor = MaterialTheme.colorScheme.error,
+            errorBorderColor = MaterialTheme.colorScheme.error
         ),
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         label = {
-            Text(
+            Label(
                 text = label,
-                color = outlineLight
+                color = MaterialTheme.colorScheme.outlineVariant,
+                style = MaterialTheme.typography.labelMedium
             )
         },
         supportingText = supportingText,

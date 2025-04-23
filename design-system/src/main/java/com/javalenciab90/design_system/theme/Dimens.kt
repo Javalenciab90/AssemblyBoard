@@ -19,6 +19,7 @@ object Dimens {
     val All_11: Dp = 11.dp
     val All_12: Dp = 12.dp
     val All_13: Dp = 13.dp
+    val All_14: Dp = 14.dp
     val All_16: Dp = 16.dp
     val All_18: Dp = 18.dp
     val All_22: Dp = 22.dp

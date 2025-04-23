@@ -33,14 +33,14 @@ fun LoginScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun WeatherScreenPreview() {
+private fun LoginScreenPreview() {
     AssemblyBoardAppTheme {
         LoginScreen(
             onHandleIntent = Unit
         ) { paddingValues ->
             LoginContent(
                 modifier = Modifier.padding(paddingValues)
-            )
+            ) {}
         }
     }
 }

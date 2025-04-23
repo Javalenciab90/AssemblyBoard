@@ -18,7 +18,7 @@ fun NavGraphBuilder.buildLoginScreen(
         ) { paddingValues ->
             LoginContent(
                 modifier = Modifier.padding(paddingValues)
-            )
+            ) {}
         }
     }
 }
