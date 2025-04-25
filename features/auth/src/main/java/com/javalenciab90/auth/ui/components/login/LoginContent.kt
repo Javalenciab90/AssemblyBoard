@@ -60,44 +60,6 @@ fun LoginContent(
     }
 }
 
-@Composable
-private fun InputLoginForm(onForgotPassword: () -> Unit) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(Dimens.All_25)
-    ) {
-        InputTextField(
-            value = "",
-            label = "email",
-            icon = {
-                Icon(
-                    modifier = Modifier.size(Dimens.All_18),
-                    painter = painterResource(R.drawable.ic_email_arroba),
-                    tint = MaterialTheme.colorScheme.primary, contentDescription = null
-                )
-            }
-        )
-        InputTextField(
-            value = "",
-            label = "contraseña",
-            isError = false,
-            icon = {
-                Icon(
-                    modifier = Modifier.size(Dimens.All_18),
-                    painter = painterResource(R.drawable.ic_email_password),
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = null
-                )
-            }
-        )
-        Label(
-            modifier = Modifier.clickable { onForgotPassword() },
-            text = "¿Olvidaste tu contraseña?",
-            textDecoration = TextDecoration.Underline,
-            style = MaterialTheme.typography.labelMedium
-        )
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 private fun LoginContentPreview() {
