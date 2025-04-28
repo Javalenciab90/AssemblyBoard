@@ -39,8 +39,10 @@ private fun LoginScreenPreview() {
             onHandleIntent = Unit
         ) { paddingValues ->
             LoginContent(
-                modifier = Modifier.padding(paddingValues)
-            ) {}
+                modifier = Modifier.padding(paddingValues),
+                onForgotPassword = {},
+                onRegisterClick = {}
+            )
         }
     }
 }

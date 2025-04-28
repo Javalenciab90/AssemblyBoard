@@ -28,7 +28,8 @@ import com.javalenciab90.design_system.theme.Dimens
 @Composable
 fun LoginContent(
     modifier: Modifier = Modifier,
-    onForgotPassword: () -> Unit
+    onForgotPassword: () -> Unit,
+    onRegisterClick: () -> Unit
 ) {
     Column (
         modifier = modifier.padding(horizontal = Dimens.All_16),
@@ -44,7 +45,9 @@ fun LoginContent(
             text = "Inicia sesión para ingresar a las asambleas de coopropietarios"
         )
         VerticalSeparator(Dimens.All_48)
-        InputLoginForm(onForgotPassword)
+        InputLoginForm {
+            onForgotPassword()
+        }
         VerticalSeparator(Dimens.All_32)
         ContainedButton(
             onClick = { }
@@ -57,6 +60,13 @@ fun LoginContent(
         GoogleButton(
             description = "Inicia sesión con Google"
         )
+        VerticalSeparator(Dimens.All_32)
+        Label(
+            modifier = Modifier.clickable { onRegisterClick() },
+            text = "register",
+            textDecoration = TextDecoration.Underline,
+            style = MaterialTheme.typography.labelMedium
+        )
     }
 }
 
@@ -65,7 +75,10 @@ fun LoginContent(
 private fun LoginContentPreview() {
     AssemblyBoardAppTheme {
         ColumnPresenter {
-            LoginContent() {}
+            LoginContent(
+                onForgotPassword = {},
+                onRegisterClick = {}
+            )
         }
     }
 }

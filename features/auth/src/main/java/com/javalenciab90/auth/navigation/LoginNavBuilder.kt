@@ -17,8 +17,22 @@ fun NavGraphBuilder.buildLoginScreen(
             onHandleIntent = Unit
         ) { paddingValues ->
             LoginContent(
-                modifier = Modifier.padding(paddingValues)
-            ) {}
+                modifier = Modifier.padding(paddingValues),
+                onForgotPassword = {
+                    //navController.navigateToReset()
+                },
+                onRegisterClick = {
+                    navController.navigateToRegister()
+                }
+            )
         }
     }
+}
+
+fun NavController.navigateToRegister() {
+    navigate(Routes.Register)
+}
+
+fun NavController.navigateToReset() {
+    navigate(Routes.Reset)
 }
