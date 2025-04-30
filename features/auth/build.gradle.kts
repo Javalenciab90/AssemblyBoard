@@ -18,9 +18,16 @@ android {
 
 dependencies {
 
+    implementation(project(":design-system"))
+    implementation(project(":navigation"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
+    implementation(libs.androidx.compose.navigation)
+
     implementation(libs.material)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
