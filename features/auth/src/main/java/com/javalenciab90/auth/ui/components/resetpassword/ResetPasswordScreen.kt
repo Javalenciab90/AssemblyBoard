@@ -26,24 +26,27 @@ import com.javalenciab90.design_system.theme.Dimens
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResetPasswordScreen (
-    modifier: Modifier,
     onHandleIntent: Unit,
+    onBack: () -> Unit,
     pageContent: @Composable (PaddingValues) -> Unit
 ){
-
-    val context = LocalContext.current
-
     Scaffold(
         topBar = {
             TopAppBar(
                 modifier = Modifier.wrapContentHeight(),
                 title = { Text("")},
                 navigationIcon = {
-                    Icon(
-                        modifier = Modifier.padding(start = Dimens.All_16).size(Dimens.All_25),
-                        painter = painterResource(id = R.drawable.back_arrow),
-                        contentDescription = "back arrow"
-                    )
+                    IconButton(
+                        onClick = { onBack() }
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(start = Dimens.All_16)
+                                .size(Dimens.All_25),
+                            painter = painterResource(id = R.drawable.back_arrow),
+                            contentDescription = null
+                        )
+                    }
                 }
             )
         },
@@ -57,8 +60,13 @@ fun ResetPasswordScreen (
 @Composable
 private fun ResetPasswordScreenPreview() {
     AssemblyBoardAppTheme {
-        ResetPasswordScreen(modifier = Modifier, onHandleIntent = Unit) { paddingValues ->
-            ResetPasswordContent (modifier = Modifier.padding(paddingValues)){  }
+        ResetPasswordScreen(
+            onHandleIntent = Unit,
+            onBack = {}
+        ) { paddingValues ->
+            ResetPasswordContent (
+                modifier = Modifier.padding(paddingValues)
+            ) { }
         }
     }
 }

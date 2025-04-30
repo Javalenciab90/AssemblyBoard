@@ -24,27 +24,22 @@ import com.javalenciab90.design_system.theme.Dimens
 @Composable
 fun ResetPasswordContent(
     modifier: Modifier = Modifier,
-    onSubmitEmail: (String) -> Unit
+    onSubmitEmail: () -> Unit
 ) {
-
-
     Column(
         modifier = modifier.padding(horizontal = Dimens.All_16),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Label(
             modifier = Modifier.fillMaxWidth(),
-            text = "Olvidaste tu contraseña",
+            text = "Recupera tu contraseña",
             style = MaterialTheme.typography.titleLarge
         )
-
         Label(
             modifier = Modifier.fillMaxWidth(),
             text = "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña"
         )
-
         VerticalSeparator(Dimens.All_48)
-
         InputTextField(
             value = "",
             label = "email",
@@ -56,11 +51,9 @@ fun ResetPasswordContent(
                 )
             }
         )
-
         VerticalSeparator(Dimens.All_32)
-
         ContainedButton(
-            onClick = { }
+            onClick = { onSubmitEmail() }
         ) {
             GenericButtonContent(
                 label = "Enviar correo de recuperación"

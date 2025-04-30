@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.javalenciab90.auth.navigation.buildLoginScreen
 import com.javalenciab90.auth.navigation.buildRegisterScreen
+import com.javalenciab90.auth.navigation.buildResetScreen
 import com.javalenciab90.navigation.routes.Routes
 
 @Composable
@@ -17,5 +18,6 @@ fun NavigatorApp(
     ) {
         buildLoginScreen(navController)
         buildRegisterScreen(navController)
+        buildResetScreen(navController)
     }
 }

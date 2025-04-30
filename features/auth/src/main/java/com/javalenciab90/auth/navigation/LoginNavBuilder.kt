@@ -19,7 +19,7 @@ fun NavGraphBuilder.buildLoginScreen(
             LoginContent(
                 modifier = Modifier.padding(paddingValues),
                 onForgotPassword = {
-                    //navController.navigateToReset()
+                    navController.navigateToReset()
                 },
                 onRegisterClick = {
                     navController.navigateToRegister()
