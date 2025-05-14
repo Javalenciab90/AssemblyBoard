@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -31,10 +34,13 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
     implementation(project(":design-system"))
     implementation(project(":navigation"))
     implementation(project(":features:auth"))
     implementation(project(":features:home"))
+    implementation(project(":service"))
+    implementation(project(":data"))
 
     //Core
     implementation(libs.androidx.core.ktx)
@@ -48,6 +54,9 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     // UI
     implementation(libs.androidx.material3)
