@@ -3,22 +3,22 @@ activityCompose = "1.10.1"
 agp = "8.7.3"
 appcompat = "1.7.0"
 coil = "2.7.0"
-composeBom = "2025.04.01"
+composeBom = "2025.05.00"
 coreKtx = "1.16.0"
 coroutines = "1.9.0"
 espressoCore = "3.6.1"
 firebaseBom = "33.13.0"
 googleServices = "4.4.2"
-hilt = "2.52"
+hilt = "2.56.2"
 hiltNavigation = "1.2.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.0"
-kotlinxSerializationJson = "1.7.1"
+kotlinxSerializationJson = "1.7.3"
 ksp = "2.0.10-1.0.24"
-lifecycleRuntimeKtx = "2.8.7"
+lifecycleRuntimeKtx = "2.9.0"
 material = "1.12.0"
-navVersion = "2.8.9"
+navVersion = "2.9.0"
 
 
 [libraries]
@@ -47,9 +47,9 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 
 # Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigation" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
