@@ -1,6 +1,6 @@
 package com.javalenciab90.data.di
 
-import com.javalenciab90.data.repository.AuthRepository
+import com.javalenciab90.auth.domain.repository.AuthRepository
 import com.javalenciab90.data.repository.AuthRepositoryImpl
 import dagger.Binds
 import dagger.Module
@@ -14,5 +14,5 @@ abstract class BindsDataModule {
 
     @Binds
     @Singleton
-    abstract fun bindAuthRepository(impl: AuthRepositoryImpl) : AuthRepository
+    abstract fun bindAuthRepository(impl: AuthRepositoryImpl) : com.javalenciab90.auth.domain.repository.AuthRepository
 }
