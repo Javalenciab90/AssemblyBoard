@@ -1,7 +1,7 @@
 package com.javalenciab90.data.di
 
-import com.javalenciab90.data.repository.AuthRepository
 import com.javalenciab90.data.repository.AuthRepositoryImpl
+import com.javalenciab90.domain.repository.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
