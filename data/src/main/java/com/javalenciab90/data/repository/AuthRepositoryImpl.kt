@@ -13,6 +13,8 @@ class AuthRepositoryImpl @Inject constructor(
     private val authFirebaseService: AuthFirebaseService
 ): AuthRepository  {
 
+    override suspend fun isLoggedIn(): Boolean = authFirebaseService.isLoggedIn()
+
     override suspend fun signInWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>> = flow {
         authFirebaseService.signInWithEmailAndPassword(email, password).map { it.toResult() }
     }
