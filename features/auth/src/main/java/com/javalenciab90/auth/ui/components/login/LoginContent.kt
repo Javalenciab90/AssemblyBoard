@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.auth.R
 import com.javalenciab90.auth.ui.components.GoogleButton
 import com.javalenciab90.auth.ui.components.InputTextField
+import com.javalenciab90.auth.ui.viewmodel.login.LoginContract
 import com.javalenciab90.design_system.components.button.ContainedButton
 import com.javalenciab90.design_system.components.button.GenericButtonContent
 import com.javalenciab90.design_system.components.preview.ColumnPresenter
@@ -28,8 +29,8 @@ import com.javalenciab90.design_system.theme.Dimens
 @Composable
 fun LoginContent(
     modifier: Modifier = Modifier,
-    onForgotPassword: () -> Unit,
-    onRegisterClick: () -> Unit
+    uiState: LoginContract.State,
+    onHandleIntent: (LoginContract.Intent) -> Unit
 ) {
     Column (
         modifier = modifier.padding(horizontal = Dimens.All_16),
@@ -45,9 +46,10 @@ fun LoginContent(
             text = "Inicia sesión para ingresar a las asambleas de coopropietarios"
         )
         VerticalSeparator(Dimens.All_48)
-        InputLoginForm {
-            onForgotPassword()
-        }
+        InputLoginForm(
+            uiState = uiState,
+            onHandleIntent = { onHandleIntent(it) }
+        )
         VerticalSeparator(Dimens.All_32)
         ContainedButton(
             onClick = { }
@@ -61,13 +63,24 @@ fun LoginContent(
             description = "Inicia sesión con Google"
         )
         VerticalSeparator(Dimens.All_32)
-        Label(
-            modifier = Modifier.clickable { onRegisterClick() },
-            text = "register",
-            textDecoration = TextDecoration.Underline,
-            style = MaterialTheme.typography.labelMedium
-        )
+        RegisterTextAction {
+            onHandleIntent(LoginContract.Intent.RegisterAction)
+        }
     }
+}
+
+@Composable
+fun RegisterTextAction(
+    onRegisterClick: () -> Unit
+) {
+    Label(
+        modifier = Modifier.clickable {
+            onRegisterClick()
+        },
+        text = "register",
+        textDecoration = TextDecoration.Underline,
+        style = MaterialTheme.typography.labelMedium
+    )
 }
 
 @Preview(showBackground = true)
@@ -76,8 +89,8 @@ private fun LoginContentPreview() {
     AssemblyBoardAppTheme {
         ColumnPresenter {
             LoginContent(
-                onForgotPassword = {},
-                onRegisterClick = {}
+                uiState = LoginContract.State(),
+                onHandleIntent = { }
             )
         }
     }

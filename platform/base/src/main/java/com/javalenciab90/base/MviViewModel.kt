@@ -10,7 +10,10 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -18,8 +21,8 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
     private val context: CoroutineContextProvider
 ) : ViewModel() {
 
-    private val handler = CoroutineExceptionHandler { _, throwble ->
-        handleError(throwble)
+    private val handler = CoroutineExceptionHandler { _, throwable ->
+        handleError(throwable)
     }
 
     @CallSuper
@@ -45,6 +48,22 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
     }
 
     open fun handleIntent(intent: INTENT) {}
+
+    private val mutex: Mutex = Mutex()
+
+    fun updateNow(reducer: (STATE) -> STATE) {
+        launchInImmediate {
+            mutex.withLock {
+                _mutableUiState.update(reducer)
+            }
+        }
+    }
+
+    protected fun launchInImmediate(
+        onStart: (suspend () -> Unit)? = null,
+        onFinish: (suspend () -> Unit)? = null,
+        block: suspend CoroutineScope.() -> Unit
+    ) = launch(block, context.immediateContext, onStart, onFinish)
 
 
     protected fun launchInMain(

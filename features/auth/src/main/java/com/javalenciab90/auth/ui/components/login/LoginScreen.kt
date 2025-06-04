@@ -10,12 +10,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.javalenciab90.auth.ui.viewmodel.login.LoginContract
 import com.javalenciab90.design_system.theme.AssemblyBoardAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onHandleIntent: Unit,
     pageContent: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
@@ -35,13 +35,11 @@ fun LoginScreen(
 @Composable
 private fun LoginScreenPreview() {
     AssemblyBoardAppTheme {
-        LoginScreen(
-            onHandleIntent = Unit
-        ) { paddingValues ->
+        LoginScreen { paddingValues ->
             LoginContent(
                 modifier = Modifier.padding(paddingValues),
-                onForgotPassword = {},
-                onRegisterClick = {}
+                uiState = LoginContract.State(),
+                onHandleIntent = {}
             )
         }
     }

@@ -21,6 +21,7 @@ android {
 dependencies {
 
     implementation(project(":design-system"))
+    implementation(project(":platform:base"))
     implementation(project(":navigation"))
     implementation(project(":domain"))
 
@@ -30,6 +31,7 @@ dependencies {
     implementation(libs.androidx.compose.navigation)
 
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
     implementation(libs.material)

@@ -15,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.auth.R
+import com.javalenciab90.auth.ui.viewmodel.reset.ResetContract
 import com.javalenciab90.design_system.theme.AssemblyBoardAppTheme
 import com.javalenciab90.design_system.theme.Dimens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResetPasswordScreen (
-    onHandleIntent: Unit,
     onBack: () -> Unit,
     pageContent: @Composable (PaddingValues) -> Unit
 ){
@@ -56,12 +56,13 @@ fun ResetPasswordScreen (
 private fun ResetPasswordScreenPreview() {
     AssemblyBoardAppTheme {
         ResetPasswordScreen(
-            onHandleIntent = Unit,
             onBack = {}
         ) { paddingValues ->
             ResetPasswordContent (
-                modifier = Modifier.padding(paddingValues)
-            ) { }
+                modifier = Modifier.padding(paddingValues),
+                uiState = ResetContract.State(),
+                onHandleIntent = {}
+            )
         }
     }
 }

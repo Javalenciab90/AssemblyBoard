@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun SplashScreen(
-    onHandleIntent: Unit,
     content: @Composable () -> Unit
 ) {
     content()

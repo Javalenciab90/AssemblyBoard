@@ -13,17 +13,19 @@ class AuthRepositoryImpl @Inject constructor(
     private val authFirebaseService: AuthFirebaseService
 ): AuthRepository  {
 
-    override suspend fun isLoggedIn(): Boolean = authFirebaseService.isLoggedIn()
-
-    override suspend fun signInWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>> = flow {
-        authFirebaseService.signInWithEmailAndPassword(email, password).map { it.toResult() }
+    override suspend fun isLoggedIn(): Flow<Result<Boolean>> {
+        return authFirebaseService.isLoggedIn().map { it.toResult() }
     }
 
-    override suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>> = flow {
-        authFirebaseService.createUserWithEmailAndPassword(email, password).map { it.toResult() }
+    override suspend fun signInWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>> {
+        return authFirebaseService.signInWithEmailAndPassword(email, password).map { it.toResult() }
     }
 
-    override suspend fun signOut(): Flow<Result<Unit>> = flow {
-        authFirebaseService.signOut().map { it.toResult() }
+    override suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>> {
+        return authFirebaseService.createUserWithEmailAndPassword(email, password).map { it.toResult() }
+    }
+
+    override suspend fun signOut(): Flow<Result<Unit>> {
+        return authFirebaseService.signOut().map { it.toResult() }
     }
 }
