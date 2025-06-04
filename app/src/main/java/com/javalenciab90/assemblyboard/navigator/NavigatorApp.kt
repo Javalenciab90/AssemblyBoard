@@ -15,7 +15,7 @@ fun NavigatorApp(
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
-        navController = navController, startDestination = Routes.Login
+        navController = navController, startDestination = Routes.Splash
     ) {
         buildSplashScreen(navController)
         buildLoginScreen(navController)

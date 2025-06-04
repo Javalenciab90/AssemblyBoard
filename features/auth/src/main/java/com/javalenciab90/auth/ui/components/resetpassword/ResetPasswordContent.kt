@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.auth.R
 import com.javalenciab90.auth.ui.components.InputTextField
+import com.javalenciab90.auth.ui.viewmodel.reset.ResetContract
 import com.javalenciab90.design_system.components.button.ContainedButton
 import com.javalenciab90.design_system.components.button.GenericButtonContent
 import com.javalenciab90.design_system.components.preview.ColumnPresenter
@@ -24,7 +25,8 @@ import com.javalenciab90.design_system.theme.Dimens
 @Composable
 fun ResetPasswordContent(
     modifier: Modifier = Modifier,
-    onSubmitEmail: () -> Unit
+    uiState: ResetContract.State,
+    onHandleIntent: (ResetContract.Intent) -> Unit
 ) {
     Column(
         modifier = modifier.padding(horizontal = Dimens.All_16),
@@ -41,7 +43,10 @@ fun ResetPasswordContent(
         )
         VerticalSeparator(Dimens.All_48)
         InputTextField(
-            value = "",
+            value = uiState.email,
+            onValueChange = {
+                onHandleIntent(ResetContract.Intent.UpdateEmail(it))
+            },
             label = "email",
             icon = {
                 Icon(
@@ -53,7 +58,9 @@ fun ResetPasswordContent(
         )
         VerticalSeparator(Dimens.All_32)
         ContainedButton(
-            onClick = { onSubmitEmail() }
+            onClick = {
+                onHandleIntent(ResetContract.Intent.SendResetEmailAction)
+            }
         ) {
             GenericButtonContent(
                 label = "Enviar correo de recuperación"
@@ -67,7 +74,10 @@ fun ResetPasswordContent(
 private fun ResetPasswordContentPreview() {
     AssemblyBoardAppTheme {
         ColumnPresenter {
-            ResetPasswordContent() {}
+            ResetPasswordContent(
+                uiState = ResetContract.State(),
+                onHandleIntent = {}
+            )
         }
     }
 }

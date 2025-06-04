@@ -8,6 +8,6 @@ interface AuthRepository {
     suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Result<Unit>>
     //suspend fun signInWithGoogle(idToken: String): Response<Nothing>
     //suspend fun getCurrentUser()
-    suspend fun isLoggedIn(): Boolean
+    suspend fun isLoggedIn(): Flow<Result<Boolean>>
     suspend fun signOut(): Flow<Result<Unit>>
 }

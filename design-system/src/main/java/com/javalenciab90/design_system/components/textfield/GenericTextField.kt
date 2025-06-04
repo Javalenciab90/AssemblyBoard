@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.input.VisualTransformation
 import com.javalenciab90.design_system.components.text.Label
 import com.javalenciab90.design_system.theme.Dimens
 import com.javalenciab90.design_system.theme.outlineLight
@@ -33,7 +34,8 @@ fun GenericTextField(
     interactionSource: MutableInteractionSource = remember {
         MutableInteractionSource()
     },
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     OutlinedTextField(
         modifier = modifier,
@@ -57,6 +59,7 @@ fun GenericTextField(
                 style = MaterialTheme.typography.labelMedium
             )
         },
+        visualTransformation = visualTransformation,
         supportingText = supportingText,
         interactionSource = interactionSource,
         keyboardOptions = keyboardOptions,

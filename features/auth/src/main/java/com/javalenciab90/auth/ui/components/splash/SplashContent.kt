@@ -11,8 +11,7 @@ import com.javalenciab90.auth.R
 
 @Composable
 fun SplashContent(
-    modifier: Modifier = Modifier,
-    navigate: () -> Unit
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize(),

@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import com.javalenciab90.auth.ui.viewmodel.register.RegisterContract
 import com.javalenciab90.design_system.components.button.ContainedButton
 import com.javalenciab90.design_system.components.button.GenericButtonContent
 import com.javalenciab90.design_system.components.preview.ColumnPresenter
@@ -21,8 +22,8 @@ import com.javalenciab90.design_system.theme.Dimens
 @Composable
 fun RegisterContent(
     modifier: Modifier = Modifier,
-    onRegisterClick: () -> Unit,
-    onLoginClick: () -> Unit,
+    uiState: RegisterContract.State,
+    onHandleIntent: (RegisterContract.Intent) -> Unit
 ) {
     Column(
         modifier = modifier.padding(horizontal = Dimens.All_16),
@@ -38,23 +39,41 @@ fun RegisterContent(
             text = "Crea una nueva cuenta para acceder a las asambleas de coopropietarios"
         )
         VerticalSeparator(Dimens.All_48)
-        InputRegisterForm()
+        InputRegisterForm(
+            email = uiState.email,
+            password = uiState.password,
+            confirmPassword = uiState.confirmPassword,
+            onHandleIntent = { onHandleIntent(it) }
+        )
         VerticalSeparator(Dimens.All_32)
         ContainedButton(
-            onClick = { onRegisterClick() }
+            onClick = {
+                onHandleIntent(RegisterContract.Intent.RegisterAction)
+            }
         ) {
             GenericButtonContent(
                 label = "Registrar"
             )
         }
         VerticalSeparator(Dimens.All_32)
-        Label(
-            modifier = Modifier.clickable { onLoginClick() },
-            text = "Iniciar sesión",
-            textDecoration = TextDecoration.Underline,
-            style = MaterialTheme.typography.labelMedium
-        )
+        LoginTextAction {
+            onHandleIntent(RegisterContract.Intent.LoginAction)
+        }
     }
+}
+
+@Composable
+fun LoginTextAction(
+    onLoginClick: () -> Unit
+) {
+    Label(
+        modifier = Modifier.clickable {
+            onLoginClick()
+        },
+        text = "Iniciar sesión",
+        textDecoration = TextDecoration.Underline,
+        style = MaterialTheme.typography.labelMedium
+    )
 }
 
 @Preview(showBackground = true)
@@ -63,8 +82,8 @@ private fun LoginContentPreview() {
     AssemblyBoardAppTheme {
         ColumnPresenter {
             RegisterContent(
-                onRegisterClick = {},
-                onLoginClick = {}
+                uiState = RegisterContract.State(),
+                onHandleIntent = {}
             )
         }
     }

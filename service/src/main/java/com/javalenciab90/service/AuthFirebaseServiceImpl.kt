@@ -11,7 +11,21 @@ class AuthFirebaseServiceImpl @Inject constructor(
     private val auth: FirebaseAuth
 ) : AuthFirebaseService {
 
-    override suspend fun isLoggedIn(): Boolean = auth.currentUser == null
+    override suspend fun isLoggedIn(): Flow<Response<Boolean>> = flow {
+        try {
+            emit(
+                Response.Success(auth.currentUser != null)
+            )
+        } catch (authException: FirebaseAuthException) {
+            emit(
+                Response.Error(code = authException.errorCode)
+            )
+        } catch (exception: Exception) {
+            emit(
+                Response.Error(exception.localizedMessage)
+            )
+        }
+    }
 
     override suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Response<Unit>> = flow {
         try {
