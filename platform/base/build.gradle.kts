@@ -31,6 +31,11 @@ dependencies {
     api(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    api(libs.coroutinesTest)
+    api(libs.testRules)
+    api(libs.mockKotlin)
+    api(libs.turbine)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -18,7 +18,10 @@ kotlinxSerializationJson = "1.7.3"
 ksp = "2.0.10-1.0.24"
 lifecycleRuntimeKtx = "2.9.0"
 material = "1.12.0"
+mockkVersion = "1.13.2"
 navVersion = "2.9.0"
+testRules = "1.5.0"
+turbineVersion = "0.12.1"
 
 
 [libraries]
@@ -62,6 +65,11 @@ kotlinnx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-corouti
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 #TESTS
+coroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+testRules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
+mockKotlin = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbineVersion" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

@@ -13,8 +13,10 @@ class SplashViewModel @Inject constructor(
     context: CoroutineContextProvider
 ) : MviViewModel<SplashContract.State, SplashContract.Effect, SplashContract.Intent>(context) {
 
-    init {
-        checkUserIsLoggedIn()
+    override fun handleIntent(intent: SplashContract.Intent) {
+        when (intent) {
+            SplashContract.Intent.CheckUserIsLoggedIn -> checkUserIsLoggedIn()
+        }
     }
 
     private fun checkUserIsLoggedIn() {

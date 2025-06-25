@@ -24,15 +24,22 @@ class LoginViewModel @Inject constructor(
                     it.copy(password = intent.password)
                 }
             }
-            LoginContract.Intent.LoginAction -> {
-                //login()
-            }
             LoginContract.Intent.RegisterAction -> {
                 postSideEffect(LoginContract.Effect.GoToRegister)
             }
             LoginContract.Intent.ForgotPasswordAction -> {
                 postSideEffect(LoginContract.Effect.GoToResetPassword)
             }
+            LoginContract.Intent.LoginAction -> {
+                /**
+                TODO: Login action, validate email and password before Login
+                if is valid, navigate to Home
+                 **/
+            }
         }
+    }
+
+    private fun validateFields() {
+
     }
 }

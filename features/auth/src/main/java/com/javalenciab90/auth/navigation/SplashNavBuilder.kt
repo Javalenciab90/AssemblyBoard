@@ -9,9 +9,9 @@ import com.javalenciab90.auth.ui.components.splash.SplashContent
 import com.javalenciab90.auth.ui.components.splash.SplashScreen
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashContract
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashViewModel
+import com.javalenciab90.base.effect.ObserveEffects
 import com.javalenciab90.navigation.routes.Routes
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 private const val MIN_SPLASH_DURATION_MS = 3000L
@@ -26,10 +26,12 @@ fun NavGraphBuilder.buildSplashScreen(
         LaunchedEffect(Unit) {
             val splashTimerJob = launch {
                 delay(MIN_SPLASH_DURATION_MS)
+                viewModel.handleIntent(SplashContract.Intent.CheckUserIsLoggedIn)
             }
-            val effect = viewModel.sideEffect.first()
             splashTimerJob.join()
+        }
 
+        ObserveEffects(flow = viewModel.sideEffect) { effect ->
             when (effect) {
                 is SplashContract.Effect.InitLoginScreen -> navController.initLogin()
                 is SplashContract.Effect.InitHomeScreen -> navController.initHome()
