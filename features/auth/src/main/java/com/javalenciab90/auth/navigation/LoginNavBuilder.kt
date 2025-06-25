@@ -52,3 +52,8 @@ fun NavController.navigateToRegister() {
 fun NavController.navigateToReset() {
     navigate(Routes.Reset)
 }
+
+fun navigateToHome() {
+    // Navigate to home screen with DeepLinks
+    // navigate(Routes.Home)
+}

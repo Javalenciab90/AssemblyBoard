@@ -11,7 +11,7 @@ class SplashContract {
     }
 
     sealed interface Intent {
-
+       data object CheckUserIsLoggedIn : Intent
     }
 }
 
