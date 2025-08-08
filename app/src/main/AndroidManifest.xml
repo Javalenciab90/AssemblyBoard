@@ -16,13 +16,25 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AssemblyBoard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        <!--
+        <intent-filter> TODO: This is just in case I want to navigate from Browser to my application
+            android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https"/>
+            <data android:host="java90.dev"/>
+            <data android:pathPrefix="/"/>
+        </intent-filter>
+        -->
         </activity>
     </application>
 

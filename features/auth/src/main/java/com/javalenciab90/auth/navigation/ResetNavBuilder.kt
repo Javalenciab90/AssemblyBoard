@@ -11,12 +11,11 @@ import com.javalenciab90.auth.ui.components.resetpassword.ResetPasswordContent
 import com.javalenciab90.auth.ui.components.resetpassword.ResetPasswordScreen
 import com.javalenciab90.auth.ui.viewmodel.reset.ResetViewModel
 import com.javalenciab90.base.effect.ObserveEffects
-import com.javalenciab90.navigation.routes.Routes
 
 fun NavGraphBuilder.buildResetScreen(
     navController: NavController
 ) {
-    composable<Routes.Reset> {
+    composable<AuthRoutes.Reset> {
 
         val viewModel = hiltViewModel<ResetViewModel>()
         val uiState = viewModel.uiState.collectAsStateWithLifecycle()

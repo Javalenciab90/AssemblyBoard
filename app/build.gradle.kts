@@ -44,10 +44,13 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":design-system"))
     implementation(project(":navigation"))
-    implementation(project(":features:auth"))
-    implementation(project(":features:home"))
+    implementation(project(":platform:base"))
+    implementation(project(":platform:deeplinks"))
     implementation(project(":service"))
     implementation(project(":data"))
+
+    implementation(project(":features:auth"))
+    implementation(project(":features:home"))
 
     //Core
     implementation(libs.androidx.core.ktx)

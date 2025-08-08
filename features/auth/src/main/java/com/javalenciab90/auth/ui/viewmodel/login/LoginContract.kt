@@ -10,6 +10,7 @@ class LoginContract {
     sealed interface Effect {
         data object GoToRegister : Effect
         data object GoToResetPassword : Effect
+        data object GoToHome : Effect
     }
 
     sealed interface Intent {

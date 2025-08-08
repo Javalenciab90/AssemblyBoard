@@ -22,6 +22,7 @@ mockkVersion = "1.13.2"
 navVersion = "2.9.0"
 testRules = "1.5.0"
 turbineVersion = "0.12.1"
+activity = "1.10.1"
 
 
 [libraries]
@@ -73,6 +74,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
