@@ -12,12 +12,11 @@ import com.javalenciab90.auth.ui.components.register.RegisterScreen
 import com.javalenciab90.auth.ui.viewmodel.register.RegisterContract
 import com.javalenciab90.auth.ui.viewmodel.register.RegisterViewModel
 import com.javalenciab90.base.effect.ObserveEffects
-import com.javalenciab90.navigation.routes.Routes
 
 fun NavGraphBuilder.buildRegisterScreen(
     navController: NavController
 ) {
-    composable<Routes.Register> {
+    composable<AuthRoutes.Register> {
 
         val viewModel = hiltViewModel<RegisterViewModel>()
         val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -49,5 +48,5 @@ fun NavController.navigateToHome() {
 }
 
 fun NavController.navigateToLogin() {
-    navigate(Routes.Login)
+    navigate(AuthRoutes.Login)
 }

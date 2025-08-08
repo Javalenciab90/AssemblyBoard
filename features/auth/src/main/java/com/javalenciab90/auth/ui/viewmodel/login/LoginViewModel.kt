@@ -35,6 +35,7 @@ class LoginViewModel @Inject constructor(
                 TODO: Login action, validate email and password before Login
                 if is valid, navigate to Home
                  **/
+                postSideEffect(LoginContract.Effect.GoToHome)
             }
         }
     }

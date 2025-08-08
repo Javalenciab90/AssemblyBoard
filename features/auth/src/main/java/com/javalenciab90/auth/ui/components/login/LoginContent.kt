@@ -52,7 +52,7 @@ fun LoginContent(
         )
         VerticalSeparator(Dimens.All_32)
         ContainedButton(
-            onClick = { }
+            onClick = { onHandleIntent(LoginContract.Intent.LoginAction) }
         ) {
             GenericButtonContent(
                 label = "Iniciar sesión"

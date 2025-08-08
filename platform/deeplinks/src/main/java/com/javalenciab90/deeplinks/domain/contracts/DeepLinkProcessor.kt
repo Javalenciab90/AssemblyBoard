@@ -1,4 +1,6 @@
-package com.javalenciab90.navigation.deepLinks
+package com.javalenciab90.deeplinks.domain.contracts
+
+import android.content.Context
 
 /**
  * It will have two functions,
@@ -9,5 +11,5 @@ package com.javalenciab90.navigation.deepLinks
 interface DeeplinkProcessor {
     fun matches(deeplink: String): Boolean
 
-    fun execute(deeplink: String)
+    fun execute(context: Context, deeplink: String) : Boolean
 }

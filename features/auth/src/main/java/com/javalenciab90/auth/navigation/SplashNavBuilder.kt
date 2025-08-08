@@ -10,7 +10,6 @@ import com.javalenciab90.auth.ui.components.splash.SplashScreen
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashContract
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashViewModel
 import com.javalenciab90.base.effect.ObserveEffects
-import com.javalenciab90.navigation.routes.Routes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -19,7 +18,7 @@ private const val MIN_SPLASH_DURATION_MS = 3000L
 fun NavGraphBuilder.buildSplashScreen(
     navController: NavController
 ) {
-    composable<Routes.Splash> {
+    composable<AuthRoutes.Splash> {
 
         val viewModel = hiltViewModel<SplashViewModel>()
 
@@ -45,13 +44,13 @@ fun NavGraphBuilder.buildSplashScreen(
 }
 
 fun NavController.initLogin() {
-    navigate(Routes.Login) {
-        popUpTo(Routes.Splash) {
+    navigate(AuthRoutes.Login) {
+        popUpTo(AuthRoutes.Splash) {
             inclusive = true
         }
     }
 }
 
 fun NavController.initHome() {
-    //navigate(Routes.Home)
+    // Todo: Navigate to HomeActivity through DeepLinks
 }

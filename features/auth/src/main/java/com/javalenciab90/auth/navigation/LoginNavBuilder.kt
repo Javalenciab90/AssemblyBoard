@@ -1,7 +1,10 @@
 package com.javalenciab90.auth.navigation
 
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -12,13 +15,15 @@ import com.javalenciab90.auth.ui.components.login.LoginScreen
 import com.javalenciab90.auth.ui.viewmodel.login.LoginContract
 import com.javalenciab90.auth.ui.viewmodel.login.LoginViewModel
 import com.javalenciab90.base.effect.ObserveEffects
-import com.javalenciab90.navigation.routes.Routes
+import com.javalenciab90.base.providers.AppProvider
+import com.javalenciab90.deeplinks.routes.Deeplink
 
 fun NavGraphBuilder.buildLoginScreen(
     navController: NavController
 ) {
-    composable<Routes.Login> {
+    composable<AuthRoutes.Login> {
 
+        val context = LocalContext.current
         val viewModel = hiltViewModel<LoginViewModel>()
         val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -29,6 +34,10 @@ fun NavGraphBuilder.buildLoginScreen(
                 }
                 LoginContract.Effect.GoToResetPassword -> {
                     navController.navigateToReset()
+                }
+                LoginContract.Effect.GoToHome -> {
+                    Log.d("TAG", "navigateDeeplinkToHome")
+                    navigateDeeplinkToHome(context = context)
                 }
             }
         }
@@ -46,14 +55,16 @@ fun NavGraphBuilder.buildLoginScreen(
 }
 
 fun NavController.navigateToRegister() {
-    navigate(Routes.Register)
+    navigate(AuthRoutes.Register)
 }
 
 fun NavController.navigateToReset() {
-    navigate(Routes.Reset)
+    navigate(AuthRoutes.Reset)
 }
 
-fun navigateToHome() {
-    // Navigate to home screen with DeepLinks
-    // navigate(Routes.Home)
+fun navigateDeeplinkToHome(context: Context) {
+    Log.d("TAG", "navigateDeeplinkToHome")
+    (context.applicationContext as AppProvider)
+        .deeplinkHandler
+        .process(context, Deeplink.Home.route)
 }

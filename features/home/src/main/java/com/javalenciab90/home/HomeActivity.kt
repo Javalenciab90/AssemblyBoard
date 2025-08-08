@@ -1,21 +1,18 @@
-package com.javalenciab90.assemblyboard.ui
+package com.javalenciab90.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.javalenciab90.navigation.NavigatorAppHost
 import com.javalenciab90.design_system.theme.AssemblyBoardAppTheme
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AssemblyBoardAppTheme {
-                NavigatorAppHost()
+                //NavigatorHome()
             }
         }
     }

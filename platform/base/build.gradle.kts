@@ -20,6 +20,8 @@ android {
 
 dependencies {
 
+    implementation(project(":platform:deeplinks"))
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -28,13 +30,13 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
 
-    api(libs.hilt.android)
+    implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    api(libs.coroutinesTest)
-    api(libs.testRules)
-    api(libs.mockKotlin)
-    api(libs.turbine)
+    implementation(libs.coroutinesTest)
+    implementation(libs.testRules)
+    implementation(libs.mockKotlin)
+    implementation(libs.turbine)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
