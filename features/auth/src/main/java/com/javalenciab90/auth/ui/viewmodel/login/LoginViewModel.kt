@@ -1,12 +1,20 @@
 package com.javalenciab90.auth.ui.viewmodel.login
 
+import com.javalenciab90.auth.domain.models.UserCredentialsModel
+import com.javalenciab90.auth.domain.usecases.SignInWithEmailUseCase
+import com.javalenciab90.auth.domain.usecases.validators.CredentialsValidationError
+import com.javalenciab90.auth.domain.usecases.validators.ValidateLoginCredentialsUseCase
+import com.javalenciab90.auth.domain.usecases.validators.ValidationResult
 import com.javalenciab90.base.CoroutineContextProvider
 import com.javalenciab90.base.MviViewModel
+import com.javalenciab90.domain.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val validateLoginUseCase: ValidateLoginCredentialsUseCase,
+    private val signInWithEmailUseCase: SignInWithEmailUseCase,
     context: CoroutineContextProvider
 ) : MviViewModel<LoginContract.State, LoginContract.Effect, LoginContract.Intent>(context) {
 
@@ -31,16 +39,56 @@ class LoginViewModel @Inject constructor(
                 postSideEffect(LoginContract.Effect.GoToResetPassword)
             }
             LoginContract.Intent.LoginAction -> {
-                /**
-                TODO: Login action, validate email and password before Login
-                if is valid, navigate to Home
-                 **/
-                postSideEffect(LoginContract.Effect.GoToHome)
+                loginValidation()
             }
         }
     }
 
-    private fun validateFields() {
+    private fun loginValidation() {
+        val credentials = UserCredentialsModel(
+            email = currentUiState.email,
+            password = currentUiState.password,
+            confirmPassword = null
+        )
+        when (val result = validateLoginUseCase(credentials)) {
+            ValidationResult.Success -> {
+                //logIn(credentials.email, credentials.password)
+                postSideEffect(LoginContract.Effect.GoToHome) // Just to check the navigation
+            }
+            is ValidationResult.Failure -> {
+                // Handle error
+                showCredentialsError(result.error)
+            }
+        }
+    }
 
+    private fun logIn(email: String, password: String) {
+        launchInBackground {
+            signInWithEmailUseCase(email, password).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        postSideEffect(LoginContract.Effect.GoToHome)
+                    }
+                    is Resource.Error -> {
+                        // Handle error failed to log in
+                        handleError(Exception("Failed to log in"))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showCredentialsError(error: CredentialsValidationError) {
+        when (error) {
+            CredentialsValidationError.EmailInvalid -> {
+                // Handle error email invalid
+            }
+            CredentialsValidationError.PasswordInvalid -> {
+                // Handle error password invalid
+            }
+            else -> {
+                // Handle other errors
+            }
+        }
     }
 }

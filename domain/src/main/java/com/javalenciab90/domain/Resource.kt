@@ -1,8 +1,8 @@
 package com.javalenciab90.domain
 
-sealed class Result<out T> {
-    data class Success<out T>(val data: T) : Result<T>()
-    data class Error(val code: String? = null) : Result<Nothing>()
+sealed class Resource<out T> {
+    data class Success<out T>(val data: T) : Resource<T>()
+    data class Error(val code: String? = null) : Resource<Nothing>()
 }
 
 enum class AuthenticationError(val errorCode: String) {
