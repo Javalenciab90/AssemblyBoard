@@ -2,7 +2,7 @@ package com.javalenciab90.auth.ui.viewmodel.splash
 
 import app.cash.turbine.test
 import com.javalenciab90.base.CoroutineTestRule
-import com.javalenciab90.domain.Result
+import com.javalenciab90.domain.Resource
 import com.javalenciab90.domain.usecases.IsLoggedInUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -34,7 +34,7 @@ class SplashViewModelTest {
     @Test
     fun `when user is logged in, should emit InitHomeScreen effect`() = runTest {
         // Given
-        coEvery { isLoggedInUseCase.invoke() } returns flowOf(Result.Success(true))
+        coEvery { isLoggedInUseCase.invoke() } returns flowOf(Resource.Success(true))
 
         // when
         viewModel.handleIntent(SplashContract.Intent.CheckUserIsLoggedIn)
@@ -49,7 +49,7 @@ class SplashViewModelTest {
     @Test
     fun `when check user is Not logged in, should emit InitLoginScreen effect`() = runTest {
         // given
-        coEvery { isLoggedInUseCase.invoke() } returns flowOf(Result.Success(false))
+        coEvery { isLoggedInUseCase.invoke() } returns flowOf(Resource.Success(false))
 
         // when
         viewModel.handleIntent(SplashContract.Intent.CheckUserIsLoggedIn)
