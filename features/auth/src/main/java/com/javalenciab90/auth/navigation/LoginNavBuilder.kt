@@ -36,7 +36,6 @@ fun NavGraphBuilder.buildLoginScreen(
                     navController.navigateToReset()
                 }
                 LoginContract.Effect.GoToHome -> {
-                    Log.d("TAG", "navigateDeeplinkToHome")
                     navigateDeeplinkToHome(context = context)
                 }
             }
@@ -63,7 +62,6 @@ fun NavController.navigateToReset() {
 }
 
 fun navigateDeeplinkToHome(context: Context) {
-    Log.d("TAG", "navigateDeeplinkToHome")
     (context.applicationContext as AppProvider)
         .deeplinkHandler
         .process(context, Deeplink.Home.route)

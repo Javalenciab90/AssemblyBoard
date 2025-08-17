@@ -1,7 +1,7 @@
 package com.javalenciab90.assemblyboard.ui
 
 import android.app.Application
-import com.javalenciab90.assemblyboard.navigator.DeeplinkHandlerEntryPoint
+import com.javalenciab90.assemblyboard.navigation.DeeplinkHandlerEntryPoint
 import com.javalenciab90.base.providers.AppProvider
 import com.javalenciab90.deeplinks.domain.contracts.DeeplinkHandler
 import dagger.hilt.android.EntryPointAccessors

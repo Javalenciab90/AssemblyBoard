@@ -10,8 +10,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val isLoggedInUseCase: IsLoggedInUseCase,
-    context: CoroutineContextProvider
-) : MviViewModel<SplashContract.State, SplashContract.Effect, SplashContract.Intent>(context) {
+    coroutineContextProvider: CoroutineContextProvider
+) : MviViewModel<SplashContract.State, SplashContract.Effect, SplashContract.Intent>(coroutineContextProvider) {
 
     override fun handleIntent(intent: SplashContract.Intent) {
         when (intent) {

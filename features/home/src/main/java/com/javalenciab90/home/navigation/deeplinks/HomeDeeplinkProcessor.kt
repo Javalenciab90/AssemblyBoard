@@ -17,7 +17,9 @@ class HomeDeeplinkProcessor @Inject constructor() : DeeplinkProcessor {
         context: Context,
         deeplink: String
     ) : Boolean {
-        context.startActivity(Intent(context, HomeActivity::class.java))
+        context.startActivity(Intent(context, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
         return true
     }
 }

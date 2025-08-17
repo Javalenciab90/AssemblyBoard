@@ -6,7 +6,7 @@ interface AuthFirebaseService {
     suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Response<Unit>>
     suspend fun signInWithEmailAndPassword(email: String, password: String): Flow<Response<Unit>>
 //    suspend fun signInWithGoogle(idToken: String): Response<Unit>
-//    suspend fun getCurrentUser(): Unit?
+    suspend fun getCurrentUser(): Flow<Response<String>>
     suspend fun isLoggedIn(): Flow<Response<Boolean>>
     suspend fun signOut(): Flow<Response<Unit>>
 }

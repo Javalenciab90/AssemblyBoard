@@ -52,11 +52,9 @@ class LoginViewModel @Inject constructor(
         )
         when (val result = validateLoginUseCase(credentials)) {
             ValidationResult.Success -> {
-                //logIn(credentials.email, credentials.password)
-                postSideEffect(LoginContract.Effect.GoToHome) // Just to check the navigation
+                logIn(credentials.email, credentials.password)
             }
             is ValidationResult.Failure -> {
-                // Handle error
                 showCredentialsError(result.error)
             }
         }

@@ -13,8 +13,8 @@ enum class AuthenticationError(val errorCode: String) {
     USER_DISABLED("ERROR_USER_DISABLED"),
     MANY_REQUESTS("ERROR_TOO_MANY_REQUESTS"),
     OPERATION_NOT_ALLOWED("ERROR_OPERATION_NOT_ALLOWED"),
+    ERROR_WEAK_PASSWORD("ERROR_WEAK_PASSWORD"),
     UNKNOWN("UNKNOWN_ERROR"),
-
 }
 
 enum class FirestoreError(val errorCode: String) {

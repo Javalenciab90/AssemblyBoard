@@ -1,4 +1,4 @@
-package com.javalenciab90.assemblyboard.navigator
+package com.javalenciab90.assemblyboard.navigation
 
 import com.javalenciab90.deeplinks.domain.contracts.DeeplinkHandler
 import dagger.hilt.EntryPoint

@@ -3,7 +3,7 @@ package com.javalenciab90.auth.ui.viewmodel.login
 class LoginContract {
 
     data class State(
-        val email: String = "",
+        val email: String = "test_01@gmail.com",
         val password: String = ""
     )
 

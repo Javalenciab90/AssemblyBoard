@@ -27,6 +27,24 @@ class AuthFirebaseServiceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getCurrentUser(): Flow<Response<String>> = flow {
+        try {
+            auth.currentUser?.let { user ->
+                emit(
+                    Response.Success(user.uid)
+                )
+            } ?: emit(Response.Error("User is null"))
+        } catch (authException: FirebaseAuthException) {
+            emit(
+                Response.Error(code = authException.errorCode)
+            )
+        } catch (exception: Exception) {
+            emit(
+                Response.Error(exception.localizedMessage)
+            )
+        }
+    }
+
     override suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Response<Unit>> = flow {
         try {
             val data = auth.createUserWithEmailAndPassword(email, password).await()
@@ -59,8 +77,12 @@ class AuthFirebaseServiceImpl @Inject constructor(
 
     override suspend fun signOut(): Flow<Response<Unit>> = flow {
         try {
-            auth.signOut()
-            emit(Response.Success(Unit))
+            if (auth.currentUser == null) {
+                emit(Response.Error("User is null"))
+            } else {
+                auth.signOut()
+                emit(Response.Success(Unit))
+            }
         } catch (authException: FirebaseAuthException) {
             emit(Response.Error(code = authException.errorCode))
         } catch (exception: Exception) {
