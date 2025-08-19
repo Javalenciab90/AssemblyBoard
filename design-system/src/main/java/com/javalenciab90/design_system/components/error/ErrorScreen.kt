@@ -28,10 +28,10 @@ import com.javalenciab90.design_system.theme.Dimens
 
 @Composable
 fun ErrorScreen(
+    modifier: Modifier = Modifier,
     @StringRes title: Int,
     @StringRes message: Int,
     @DrawableRes icon: Int? = null,
-    modifier: Modifier = Modifier,
     onRetryClick: (() -> Unit)? = null
 ) {
     Box(

@@ -53,7 +53,8 @@ class HomeViewModel @Inject constructor(
                     is Resource.Success -> {
                         postSideEffect(HomeContract.Effect.SignOut)
                     }
-                    is Resource.Error -> { // TODO: Handle error
+                    is Resource.Error -> {
+                        // TODO: Handle error
                         postSideEffect(HomeContract.Effect.SignOut)
                     }
                 }

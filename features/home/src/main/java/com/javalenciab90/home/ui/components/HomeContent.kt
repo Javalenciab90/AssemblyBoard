@@ -50,7 +50,7 @@ fun HomeContent(
                 ) {
                     Text(text = "Back to Login")
                 }
-                // Show error message
+                // Show error message with ErrorScreen composable.
             }
         }
     }

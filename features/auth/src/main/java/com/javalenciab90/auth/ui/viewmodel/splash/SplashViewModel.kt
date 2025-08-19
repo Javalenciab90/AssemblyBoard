@@ -31,6 +31,7 @@ class SplashViewModel @Inject constructor(
                         }
                     }
                     is Resource.Error -> {
+                        result.error
                         // TODO: Handle error
                     }
                 }

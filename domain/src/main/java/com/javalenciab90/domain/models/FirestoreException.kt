@@ -1,4 +1,4 @@
-package com.javalenciab90.data.models
+package com.javalenciab90.domain.models
 
 sealed class FirestoreException {
 
@@ -22,6 +22,7 @@ sealed class FirestoreException {
                 Unauthenticated.errorCode -> Unauthenticated
                 Unavailable.errorCode -> Unavailable
                 Unimplemented.errorCode -> Unimplemented
+                UnCreatedUser.errorCode -> UnCreatedUser
                 else -> Unknown
             }
         }
@@ -100,6 +101,11 @@ sealed class FirestoreException {
     data object Unimplemented : FirestoreException() {
         override val errorCode: String
             get() = "UNIMPLEMENTED"
+    }
+
+    data object UnCreatedUser : FirestoreException() {
+        override val errorCode: String
+            get() = "UNCREATED_USER"
     }
 
     data object Unknown : FirestoreException() {
