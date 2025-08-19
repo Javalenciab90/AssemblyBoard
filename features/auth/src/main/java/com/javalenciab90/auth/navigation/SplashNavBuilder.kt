@@ -10,6 +10,8 @@ import com.javalenciab90.auth.ui.components.splash.SplashScreen
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashContract
 import com.javalenciab90.auth.ui.viewmodel.splash.SplashViewModel
 import com.javalenciab90.base.effect.ObserveEffects
+import com.javalenciab90.base.providers.AppProvider
+import com.javalenciab90.deeplinks.routes.Deeplink
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -52,5 +54,7 @@ fun NavController.initLogin() {
 }
 
 fun NavController.initHome() {
-    // Todo: Navigate to HomeActivity through DeepLinks
+    (context.applicationContext as AppProvider)
+        .deeplinkHandler
+        .process(context, Deeplink.Home.route)
 }

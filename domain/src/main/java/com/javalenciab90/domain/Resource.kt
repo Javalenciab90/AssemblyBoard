@@ -1,37 +1,6 @@
 package com.javalenciab90.domain
 
-sealed class Resource<out T> {
-    data class Success<out T>(val data: T) : Resource<T>()
-    data class Error(val code: String? = null) : Resource<Nothing>()
-}
-
-enum class AuthenticationError(val errorCode: String) {
-    EMAIL_ALREADY_IN_USE("ERROR_EMAIL_ALREADY_IN_USE"),
-    INVALID_EMAIL("ERROR_INVALID_EMAIL"),
-    WRONG_PASSWORD("ERROR_WRONG_PASSWORD"),
-    USER_NOT_FOUND("ERROR_USER_NOT_FOUND"),
-    USER_DISABLED("ERROR_USER_DISABLED"),
-    MANY_REQUESTS("ERROR_TOO_MANY_REQUESTS"),
-    OPERATION_NOT_ALLOWED("ERROR_OPERATION_NOT_ALLOWED"),
-    UNKNOWN("UNKNOWN_ERROR"),
-
-}
-
-enum class FirestoreError(val errorCode: String) {
-    ABORTED("ABORTED"),
-    ALREADY_EXISTS("ALREADY_EXISTS"),
-    CANCELLED("CANCELLED"),
-    DATA_LOSS("DATA_LOSS"),
-    DEADLINE_EXCEEDED("DEADLINE_EXCEEDED"),
-    FAILED_PRECONDITION("FAILED_PRECONDITION"),
-    INTERNAL("Internal"),
-    INVALID_ARGUMENT("INVALID_ARGUMENT"),
-    NOT_FOUND("NOT_FOUND"),
-    OUT_OF_RANGE("OUT_OF_RANGE"),
-    PERMISSION_DENIED("PERMISSION_DENIED"),
-    RESOURCE_EXHAUSTED("RESOURCE_EXHAUSTED"),
-    UNAUTHENTICATED("UNAUTHENTICATED"),
-    UNAVAILABLE("UNAVAILABLE"),
-    UNIMPLEMENTED("UNIMPLEMENTED"),
-    UNKNOWN("UNKNOWN");
+sealed class Resource<out T, out E> {
+    data class Success<out T>(val data: T) : Resource<T, Nothing>()
+    data class Error<out E>(val error: E) : Resource<Nothing, E>()
 }

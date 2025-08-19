@@ -1,4 +1,4 @@
-package com.javalenciab90.data.models
+package com.javalenciab90.domain.models
 
 sealed class AuthFirebaseException {
 
