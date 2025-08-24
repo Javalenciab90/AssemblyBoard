@@ -37,6 +37,12 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.google.auth)
+    implementation(libs.firebase.credentials)
+    implementation(libs.firebase.credentials.play.services.auth)
+    implementation(libs.firebase.googleid)
+
     implementation(libs.material)
     implementation(libs.androidx.material3)
     implementation(platform(libs.androidx.compose.bom))

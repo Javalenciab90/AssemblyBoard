@@ -1,5 +1,6 @@
 package com.javalenciab90.data.repository
 
+import com.javalenciab90.data.mappers.mapToResourceFlow
 import com.javalenciab90.data.mappers.toResourceFlow
 import com.javalenciab90.domain.Resource
 import com.javalenciab90.domain.models.AuthFirebaseException
@@ -13,11 +14,26 @@ class AuthRepositoryImpl @Inject constructor(
 ): AuthRepository  {
 
     override suspend fun isLoggedIn(): Flow<Resource<Boolean, AuthFirebaseException>> {
-        return authFirebaseService.isLoggedIn().toResourceFlow { AuthFirebaseException.getError(it) }
+        return authFirebaseService.isLoggedIn().mapToResourceFlow(
+            dataMapper = { it },
+            errorMapper = { AuthFirebaseException.getError(it) }
+        )
     }
 
     override suspend fun signInWithEmailAndPassword(email: String, password: String): Flow<Resource<Unit, AuthFirebaseException>> {
-        return authFirebaseService.signInWithEmailAndPassword(email, password).toResourceFlow { AuthFirebaseException.getError(it) }
+        return authFirebaseService.signInWithEmailAndPassword(email, password).mapToResourceFlow(
+            dataMapper = { },
+            errorMapper = { AuthFirebaseException.getError(it) }
+        )
+    }
+
+    override suspend fun signInWithGoogle(idToken: String): Flow<Resource<Unit, AuthFirebaseException>> {
+        return authFirebaseService.signInWithGoogle(idToken).mapToResourceFlow(
+            dataMapper = { },
+            errorMapper = {
+                AuthFirebaseException.getError(it)
+            }
+        )
     }
 
     override suspend fun createUserWithEmailAndPassword(email: String, password: String): Flow<Resource<Unit, AuthFirebaseException>> {

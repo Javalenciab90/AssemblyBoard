@@ -32,8 +32,9 @@ class HomeViewModel @Inject constructor(
             getCurrentUserUseCase().collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        // Todo: Check if user is Admin or Not to show the right UI
                         updateNow {
-                            it.copy(status = Status.Success(currentUser = result.data))
+                            it.copy(status = Status.Success(currentUserProfile = result.data))
                         }
                     }
                     is Resource.Error -> {

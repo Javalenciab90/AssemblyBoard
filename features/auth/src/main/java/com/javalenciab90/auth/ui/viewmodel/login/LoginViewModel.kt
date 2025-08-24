@@ -1,7 +1,11 @@
 package com.javalenciab90.auth.ui.viewmodel.login
 
+import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.GetCredentialException
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.javalenciab90.auth.domain.models.UserCredentialsModel
 import com.javalenciab90.auth.domain.usecases.SignInWithEmailUseCase
+import com.javalenciab90.auth.domain.usecases.SignInWithGoogleUseCase
 import com.javalenciab90.auth.domain.usecases.validators.CredentialsValidationError
 import com.javalenciab90.auth.domain.usecases.validators.ValidateLoginCredentialsUseCase
 import com.javalenciab90.auth.domain.usecases.validators.ValidationResult
@@ -15,6 +19,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val validateLoginUseCase: ValidateLoginCredentialsUseCase,
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
+    private val signInWithGoogleUseCase: SignInWithGoogleUseCase,
     context: CoroutineContextProvider
 ) : MviViewModel<LoginContract.State, LoginContract.Effect, LoginContract.Intent>(context) {
 
@@ -38,8 +43,18 @@ class LoginViewModel @Inject constructor(
             LoginContract.Intent.ForgotPasswordAction -> {
                 postSideEffect(LoginContract.Effect.GoToResetPassword)
             }
-            LoginContract.Intent.LoginAction -> {
+            LoginContract.Intent.SignInWithEmail -> {
                 loginValidation()
+            }
+            LoginContract.Intent.SignInWithGoogle -> {
+                launchGoogleSignIn()
+            }
+            is LoginContract.Intent.GoogleSignInSuccess -> {
+                signInWithGoogleSuccess(intent.credentialResponse)
+            }
+            is LoginContract.Intent.GoogleSignInFailure -> {
+                // Handle error failed to log in
+                signInWithGoogleFailure(intent.exception)
             }
         }
     }
@@ -52,7 +67,7 @@ class LoginViewModel @Inject constructor(
         )
         when (val result = validateLoginUseCase(credentials)) {
             ValidationResult.Success -> {
-                logIn(credentials.email, credentials.password)
+                signInWithEmail(credentials.email, credentials.password)
             }
             is ValidationResult.Failure -> {
                 showCredentialsError(result.error)
@@ -60,7 +75,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun logIn(email: String, password: String) {
+    private fun signInWithEmail(email: String, password: String) {
         launchInBackground {
             signInWithEmailUseCase(email, password).collect { result ->
                 when (result) {
@@ -88,5 +103,27 @@ class LoginViewModel @Inject constructor(
                 // Handle other errors
             }
         }
+    }
+
+    private fun launchGoogleSignIn() {
+        postSideEffect(LoginContract.Effect.LaunchGoogleSignIn)
+    }
+
+    private fun signInWithGoogleSuccess(credentialResponse: GetCredentialResponse) {
+        launchInBackground {
+            val credential = credentialResponse.credential
+            if (credential is GoogleIdTokenCredential) {
+                signInWithGoogleUseCase(credential.idToken).collect { resource ->
+                    when (resource) {
+                        is Resource.Success -> postSideEffect(LoginContract.Effect.GoToHome)
+                        is Resource.Error -> { /* Handle error */ }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun signInWithGoogleFailure(exception: GetCredentialException) {
+        // Todo: Handle error failed to log in with google
     }
 }
