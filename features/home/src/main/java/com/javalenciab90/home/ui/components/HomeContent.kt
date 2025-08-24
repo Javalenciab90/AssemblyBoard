@@ -30,7 +30,7 @@ fun HomeContent(
             }
             is Status.Success -> {
                 Label(
-                    text = "CurrentUser: ${uiState.status.currentUser}",
+                    text = "CurrentUser: ${uiState.status.currentUserProfile.uid} - ${uiState.status.currentUserProfile.email}",
                     style = MaterialTheme.typography.titleLarge
                 )
                 Button(

@@ -1,5 +1,7 @@
 package com.javalenciab90.home.ui.viewmodel
 
+import com.javalenciab90.domain.models.UserProfile
+
 class HomeContract {
     data class State(
         val status: Status
@@ -16,7 +18,13 @@ class HomeContract {
 
 sealed interface Status {
     data class Success(
-        val currentUser: String = ""
+        val currentUserProfile: UserProfile = UserProfile(
+            uid = "",
+            displayName = "",
+            email = "",
+            photoUrl = "",
+            phoneNumber = ""
+        )
     ) : Status
     data object Loading : Status
     data object Error : Status

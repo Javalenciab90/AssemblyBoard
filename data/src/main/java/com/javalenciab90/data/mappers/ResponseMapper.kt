@@ -31,3 +31,31 @@ fun <T, E> Flow<Response<T, String>>.toResourceFlow(
         }
     }
 }
+
+/**
+ * Maps a Flow of a generic Response to a Flow of a generic Resource.
+ * Handles both data and error transformations.
+ *
+ * @param T The original type of the data in the Response (e.g., FirebaseUser).
+ * @param R The final type of the data in the Resource (e.g., UserProfile).
+ * @param E The final type of the exception (e.g., AuthFirebaseException).
+ * @param dataMapper A function that maps the successful data from type T to R.
+ * @param errorMapper A function that maps a String error code to an exception of type E.
+ */
+fun <T, R, E> Flow<Response<T, String>>.mapToResourceFlow(
+    dataMapper: (T) -> R,
+    errorMapper: (String) -> E
+): Flow<Resource<R, E>> {
+    return this.map { response ->
+        when (response) {
+            is Response.Success -> {
+                val mappedData = dataMapper(response.data)
+                Resource.Success(mappedData)
+            }
+            is Response.Error -> {
+                val exception = errorMapper(response.error)
+                Resource.Error(exception)
+            }
+        }
+    }
+}

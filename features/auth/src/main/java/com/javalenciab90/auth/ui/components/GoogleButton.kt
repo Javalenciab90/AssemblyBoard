@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.javalenciab90.auth.R
@@ -18,16 +19,19 @@ import com.javalenciab90.design_system.theme.Dimens
 
 @Composable
 fun GoogleButton(
-    description: String
+    modifier: Modifier = Modifier,
+    description: String,
+    onClick: () -> Unit
 ) {
     OutlinedButton(
+        modifier = modifier,
         shape = RoundedCornerShape(Dimens.All_12),
         contentPadding =  GenericButtonDefaults.ContentPadding,
         border = BorderStroke(
             width = Dimens.All_1,
             color = MaterialTheme.colorScheme.primary
         ),
-        onClick = { },
+        onClick = { onClick() },
         content = {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(Dimens.All_8),
