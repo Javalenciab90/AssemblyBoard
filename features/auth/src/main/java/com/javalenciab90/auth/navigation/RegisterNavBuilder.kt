@@ -2,6 +2,7 @@ package com.javalenciab90.auth.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -20,11 +21,15 @@ fun NavGraphBuilder.buildRegisterScreen(
 
         val viewModel = hiltViewModel<RegisterViewModel>()
         val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+        val context = LocalContext.current
 
         ObserveEffects(flow = viewModel.sideEffect) { effect ->
             when (effect) {
                 RegisterContract.Effect.GoToLogin -> {
                     navController.navigateToLogin()
+                }
+                RegisterContract.Effect.GoToHome -> {
+                    navigateDeeplinkToHome(context = context)
                 }
             }
         }
@@ -41,10 +46,6 @@ fun NavGraphBuilder.buildRegisterScreen(
             }
         }
     }
-}
-
-fun NavController.navigateToHome() {
-    // TODO: Navigate with deepLinks to Home
 }
 
 fun NavController.navigateToLogin() {

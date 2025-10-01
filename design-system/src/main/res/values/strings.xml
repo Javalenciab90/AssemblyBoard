@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Generic Dialog Strings -->
+    <string name="dialog_confirm_button_default">Confirmar</string>
+    <string name="dialog_cancel_button_default">Cancelar</string>
+</resources>

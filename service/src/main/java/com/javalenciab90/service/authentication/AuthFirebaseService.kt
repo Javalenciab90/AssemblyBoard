@@ -1,6 +1,7 @@
-package com.javalenciab90.service
+package com.javalenciab90.service.authentication
 
 import com.google.firebase.auth.FirebaseUser
+import com.javalenciab90.service.models.Response
 import kotlinx.coroutines.flow.Flow
 
 interface AuthFirebaseService {

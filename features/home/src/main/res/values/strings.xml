@@ -1,1 +1,7 @@
-<resources></resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Sign Out Dialog -->
+    <string name="dialog_sign_out_title">Cerrar Sesión</string>
+    <string name="dialog_sign_out_message">¿Estás seguro de que quieres cerrar sesión? Esta acción cerrará tu sesión actual.</string>
+    <string name="dialog_sign_out_confirm">Cerrar Sesión</string>
+</resources>

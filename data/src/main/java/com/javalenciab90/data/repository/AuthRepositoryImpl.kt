@@ -5,7 +5,7 @@ import com.javalenciab90.data.mappers.toResourceFlow
 import com.javalenciab90.domain.Resource
 import com.javalenciab90.domain.models.AuthFirebaseException
 import com.javalenciab90.domain.repositories.AuthRepository
-import com.javalenciab90.service.AuthFirebaseService
+import com.javalenciab90.service.authentication.AuthFirebaseService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

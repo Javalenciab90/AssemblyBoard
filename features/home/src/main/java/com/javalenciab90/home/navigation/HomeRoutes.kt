@@ -7,4 +7,7 @@ sealed interface HomeRoutes {
 
     @Serializable
     data object Home : HomeRoutes
+
+    @Serializable
+    data object Profile : HomeRoutes
 }

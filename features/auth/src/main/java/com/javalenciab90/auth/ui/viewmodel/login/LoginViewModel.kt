@@ -53,7 +53,6 @@ class LoginViewModel @Inject constructor(
                 signInWithGoogleSuccess(intent.credentialResponse)
             }
             is LoginContract.Intent.GoogleSignInFailure -> {
-                // Handle error failed to log in
                 signInWithGoogleFailure(intent.exception)
             }
         }

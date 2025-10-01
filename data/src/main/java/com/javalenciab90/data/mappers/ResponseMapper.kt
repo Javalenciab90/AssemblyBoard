@@ -1,7 +1,7 @@
 package com.javalenciab90.data.mappers
 
 import com.javalenciab90.domain.Resource
-import com.javalenciab90.service.Response
+import com.javalenciab90.service.models.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

@@ -2,9 +2,7 @@ package com.javalenciab90.home.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,11 +31,6 @@ fun HomeContent(
                     text = "CurrentUser: ${uiState.status.currentUserProfile.uid} - ${uiState.status.currentUserProfile.email}",
                     style = MaterialTheme.typography.titleLarge
                 )
-                Button(
-                    onClick = { onHandleIntent(HomeContract.Intent.SignOut) }
-                ) {
-                    Text(text = "Sign Out")
-                }
                 // Show data
             }
             is Status.Error -> {
@@ -45,11 +38,6 @@ fun HomeContent(
                     text = "Error",
                     style = MaterialTheme.typography.titleLarge
                 )
-                Button(
-                    onClick = { onHandleIntent(HomeContract.Intent.SignOut) }
-                ) {
-                    Text(text = "Back to Login")
-                }
                 // Show error message with ErrorScreen composable.
             }
         }

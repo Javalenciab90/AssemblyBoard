@@ -10,6 +10,7 @@ class RegisterContract {
 
     sealed interface Effect {
         data object GoToLogin : Effect
+        data object GoToHome : Effect
     }
 
     sealed interface Intent {

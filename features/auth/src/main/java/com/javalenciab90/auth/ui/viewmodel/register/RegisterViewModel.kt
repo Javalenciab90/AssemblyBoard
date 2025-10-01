@@ -67,7 +67,7 @@ class RegisterViewModel @Inject constructor(
             createUserWithEmailUseCase(email, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        postSideEffect(RegisterContract.Effect.GoToLogin)
+                        postSideEffect(RegisterContract.Effect.GoToHome)
                     }
                     is Resource.Error -> {
                         // Handle error failed to create user
